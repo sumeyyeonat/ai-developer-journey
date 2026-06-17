@@ -5,22 +5,34 @@ from dotenv import load_dotenv
 # 1. .env dosyasındaki gizli şifreleri yükle
 load_dotenv()
 
-# 2. Gemini istemcisini başlat (Şifreyi otomatik çeker)
+# 2. Gemini istemcisini başlat
 client = genai.Client()
 
-print("Gemini'ye mesaj gönderiliyor (Ücretsiz Tier)...")
+# 3. Canlı bir sohbet (chat) oturumu başlatıyoruz
+# Bu oturum, konuşma geçmişimizi arka planda hafızasında tutacak.
+chat = client.chats.create(model="gemini-2.5-flash")
 
-try:
-    # 3. Gemini-2.5-Flash modeline mesaj gönderiyoruz
-    response = client.models.generate_content(
-        model='gemini-2.5-flash',
-        contents='Merhaba Gemini! Ben 60 günlük yapay zeka yolculuğuma başladım. Bana bu yolculuk için tek cümlelik harika bir tavsiye verir misin?',
-    )
+print("🚀 Gemini ile Canlı Sohbet Başladı! (Çıkmak için 'çıkış' yazabilirsin)\n")
 
-    # 4. Gelen canlı yanıtı ekrana yazdırıyoruz
-    print("\n--- Gemini'nin Cevabı ---")
-    print(response.text)
+while True:
+    # Kullanıcıdan (senden) girdi alıyoruz
+    user_message = input("Siz: ")
 
-except Exception as e:
-    print("\n--- Bir Hata Oluştu ---")
-    print(e)
+    # Eğer 'çıkış' yazarsan döngüyü bitir
+    if user_message.lower() == 'çıkış':
+        print("\nSohbet sonlandırıldı. Harika bir konuşmaydı!")
+        break
+
+    # Boş mesaj gönderilmesini engelle
+    if not user_message.strip():
+        continue
+
+    try:
+        # Mesajı sohbet oturumuna gönderiyoruz
+        response = chat.send_message(user_message)
+
+        # Gemini'nin yanıtını ekrana yazdırıyoruz
+        print(f"Gemini: {response.text}\n")
+
+    except Exception as e:
+        print(f"\n⚠️ Bir hata oluştu: {e}\n")
