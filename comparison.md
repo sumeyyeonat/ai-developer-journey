@@ -10,3 +10,6 @@
 
 ## 3. Benim Değerlendirmem
 İki büyük yapay zeka şirketinin de kütüphane mantığı birbirine çok benziyor. İkisi de güvenlik için `.env` dosyasından şifre okuyor.
+
+## 4. Google Gemini Deneyimi (Ücretsiz Kurtarıcı)
+- **Sonuç:** OpenAI ve Anthropic bakiye hatası verirken, Google Gemini API ücretsiz katmanı sayesinde kredi kartı istemeden `gemini-2.5-flash` modeliyle bize canlı yanıtı başarıyla döndürdü. Öğrenme sürecimize bütçe dostu olarak Gemini ile devam edebiliriz!
