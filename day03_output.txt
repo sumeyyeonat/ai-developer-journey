@@ -1,0 +1,28 @@
+"Anthropic API bakiye yetersizliği nedeniyle sunucu hata döndürdü"
+(venv) C:\Users\sumey\ai-developer-journey>python hello_claude.py
+Claude'a mesaj gönderiliyor...
+Traceback (most recent call last):
+  File "C:\Users\sumey\ai-developer-journey\hello_claude.py", line 14, in <module>
+    message = client.messages.create(
+        model="claude-3-5-sonnet-20241022",  # Kullanacağımız güçlü Claude modeli
+    ...<3 lines>...
+        ]
+    )
+  File "C:\Users\sumey\ai-developer-journey\venv\Lib\site-packages\anthropic\_utils\_utils.py", line 294, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\sumey\ai-developer-journey\venv\Lib\site-packages\anthropic\resources\messages\messages.py", line 1009, in create
+    return self._post(
+           ~~~~~~~~~~^
+        "/v1/messages",
+        ^^^^^^^^^^^^^^^
+    ...<30 lines>...
+        stream_cls=Stream[RawMessageStreamEvent],
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\sumey\ai-developer-journey\venv\Lib\site-packages\anthropic\_base_client.py", line 1535, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\sumey\ai-developer-journey\venv\Lib\site-packages\anthropic\_base_client.py", line 1194, in request
+    raise self._make_status_error_from_response(response) from None
+anthropic.BadRequestError: Error code: 400 - {'type': 'error', 'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low to access the Anthropic API. Please go to Plans & Billing to upgrade or purchase credits.'}, 'request_id': 'req_011Cc8UoG7G3r6t3m55pQr36'}
